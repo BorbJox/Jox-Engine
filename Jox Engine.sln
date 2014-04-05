@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Windows Desktop
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGL Framework", "OpenGL Framework\OpenGL Framework.vcxproj", "{F44E157D-6A70-49E3-B566-4662B665455D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Jox Engine", "OpenGL Framework\OpenGL Framework.vcxproj", "{F44E157D-6A70-49E3-B566-4662B665455D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

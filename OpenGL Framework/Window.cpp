@@ -1,6 +1,6 @@
 #include "Window.h"
 
-Window::Window() {
+Window::Window(int width, int height) : windowWidth(width), windowHeight(height) {
 	if (!glfwInit()) {
 		fprintf(stderr, "Failed to initialize GLFW\n");
 		pause();
@@ -14,12 +14,12 @@ Window::Window() {
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	//Window creation
-	theWindow = glfwCreateWindow(800, 800, "Left and Right to move, Space to calculate path", nullptr, nullptr); // Windowed, can do Fullscreen here
+	theWindow = glfwCreateWindow(windowWidth, windowHeight, "Left and Right to move, Space to calculate path", nullptr, nullptr); // Windowed, can do Fullscreen here
 	//GLFWwindow* window = glfwCreateWindow(1920, 1080, "OpenGL", glfwGetPrimaryMonitor(), nullptr); // Fullscreen
 
 	if (theWindow == NULL){
 		glfwTerminate();
-		fprintf(stderr, "Failed to open GLFW window. Your GPU is probably not compatible with this version of OpenGL.\n");
+		fprintf(stderr, "Failed to open GLFW window. Your GPU is probably not compatible with this version of OpenGL (3).\n");
 		pause();
 		glfwTerminate();
 		exit(EXIT_FAILURE);
@@ -43,8 +43,8 @@ Window::Window() {
 	// Blue background
 	glClearColor(0.3f, 0.3f, 0.6f, 0.0f);
 
-	//glEnable(GL_DEPTH_TEST);
-	//glDepthFunc(GL_LESS);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
 	glEnable(GL_CULL_FACE);
 
 }
@@ -62,7 +62,7 @@ glm::vec2 Window::getCursorPos() {
 }
 
 void Window::centerCursor() {
-	glfwSetCursorPos(theWindow, 400.0,300.0);
+	glfwSetCursorPos(theWindow, windowWidth / 2, windowHeight / 2);
 }
 
 bool Window::isMousePressed() {

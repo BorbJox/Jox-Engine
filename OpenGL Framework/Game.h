@@ -4,12 +4,16 @@
 #include "Window.h"
 #include "PhysicsControl.h"
 #include "AIControl.h"
-//Game class to manage Scenes
+
+/*
+Manages Scenes
+*/
 class Game
 {
 public:
 	Game(Renderer* r);
 	~Game();
+	//Update the game entities by stepping forward one frame
 	void update();
 	PhysicsControl* getPhysicsController() { return physicsController; }
 private:

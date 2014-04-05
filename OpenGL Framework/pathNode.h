@@ -25,5 +25,4 @@ private:
 	bool passable;
 	int heuristicDistance;
 	int sign(int x);
-	//heuristic distance calculated
 };

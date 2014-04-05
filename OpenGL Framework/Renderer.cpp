@@ -2,7 +2,6 @@
 
 
 Renderer::Renderer(Window &w) {
-	//TODO: Should capture "nice" input and make it work in the raw format, I guess..
 	windowHandle = &w;
 }
 
@@ -12,7 +11,6 @@ Renderer::~Renderer() {
 }
 
 void Renderer::renderScene() {
-
 	glfwMakeContextCurrent(windowHandle->getWindow());
 	for each (RenderObject* obj in objectArray)
 		obj->Draw(viewMatrix, projectionMatrix);

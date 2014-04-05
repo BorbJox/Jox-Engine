@@ -4,7 +4,9 @@
 #include "RenderObject.h"
 #include <vector>
 
-//OpenGL renderer class
+/*
+Holds a pointer to the Window, and all the Renderobjects it needs to render.
+*/
 class Renderer {
 
 public:
