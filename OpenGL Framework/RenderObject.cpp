@@ -41,7 +41,6 @@ RenderObject::~RenderObject() {
 		glDeleteBuffers(1, &elementBuffer);
 	if (hasColour)
 		glDeleteBuffers(1, &colourBuffer);
-	glDeleteTextures(1, &texture);
 	glDeleteBuffers(1, &uvBuffer);
 	glDeleteBuffers(1, &vertexBuffer);
 	glDeleteVertexArrays(1, &vao);
