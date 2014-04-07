@@ -29,7 +29,6 @@ private:
 	int currentSceneID;
 	irrklang::ISound* music;
 	void switchScene(int sceneID);
-	std::vector<Shader*> shaders;
 	irrklang::ISoundEngine* soundEngine;
 	glm::vec3 cameraPos = glm::vec3(7.0f, 5.0f, 5.0f);
 	float cameraPitch = 3.14f;

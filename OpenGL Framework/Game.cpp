@@ -2,12 +2,6 @@
 
 
 Game::Game(Renderer* r) : r(r) {
-	shaders.push_back(new Shader(true, false, false, "shaders/generic3DVertex.glsl", "shaders/genericFragment.glsl"));
-	shaders.push_back(new Shader(false, false, false, "shaders/genericVertex.glsl", "shaders/genericFragment.glsl"));
-	shaders.push_back(new Shader(true, true, false, "shaders/genericTextured3DVertex.glsl", "shaders/genericTexturedFragment.glsl"));
-	shaders.push_back(new Shader(true, true, true, "shaders/litTextured3DVertex.glsl", "shaders/litTextured3DFragment.glsl"));
-	shaders.push_back(new Shader(false, true, false, "shaders/textured2DVertex.glsl", "shaders/genericTexturedFragment.glsl"));
-	shaders.push_back(new Shader(false, false, false, "shaders/coloured2DVertex.glsl", "shaders/coloured2DFragment.glsl"));
 
 	currentSceneID = 0;
 	scenes[currentSceneID] = (createMainMenu());
@@ -19,10 +13,6 @@ Game::Game(Renderer* r) : r(r) {
 Game::~Game() {
 	for each (Scene* s in scenes)
 		delete s;
-	for each (Shader* s in shaders) {
-		s->deleteProgram();
-		delete s;
-	}
 	if (soundEngine)
 		soundEngine->removeAllSoundSources();
 	delete physicsController;
@@ -130,7 +120,7 @@ void Game::update() {
 }
 
 Scene* Game::createMainMenu() {
-	Scene* tempScene = new Scene(shaders, r);
+	Scene* tempScene = new Scene(r);
 	Quad2D* tempQuad = new Quad2D("img/startbutton.png", 0.4f, 0.2f, glm::vec3(0.0f, 0.0f, 0.0f));
 	tempScene->addEntity(tempQuad);
 
@@ -138,7 +128,7 @@ Scene* Game::createMainMenu() {
 }
 
 Scene* Game::createPhysicsBox() {
-	Scene* tempScene = new Scene(shaders, r);
+	Scene* tempScene = new Scene(r);
 	
 	//Room creation
 	Mesh3D* tempMesh = new Mesh3D("meshes/room.obj", "img/roomtex.png", glm::vec3(0.0f, 0.0f, 0.0f));
@@ -221,7 +211,7 @@ Scene* Game::createPhysicsBox() {
 }
 
 Scene* Game::create3DTestScene() {
-		Scene* tempScene = new Scene(shaders, r);
+		Scene* tempScene = new Scene(r);
 		tempScene->addEntity(new Point(glm::vec3(0.0f, 0.0f, 0.0f)));
 
 		Quad2D* tempQuad = new Quad2D("img/esctoexit.png", 0.4f, 0.4f, glm::vec3(0.5f, 0.5f, 0.0f));

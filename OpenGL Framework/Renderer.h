@@ -10,7 +10,7 @@ Holds a pointer to the Window, and all the Renderobjects it needs to render.
 class Renderer {
 
 public:
-	Renderer(Window &w);
+	Renderer(int windowWidth, int windowHeight);
 	~Renderer();
 	//Render all current RenderObjects in the vector onto the screen.
 	void renderScene();
@@ -25,6 +25,7 @@ public:
 	//Don't forget to delete pointers if you're not going to use the objects any more!
 	void clearCurrentObjects();
 	Window* getWindow() { return windowHandle; }
+	GLFWwindow* getGLFWWindow() { return windowHandle->getWindow(); }
 	void setCamera(glm::mat4 projection, glm::mat4 view);
 private:
 	std::vector<RenderObject*> objectArray;

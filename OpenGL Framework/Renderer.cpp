@@ -1,13 +1,13 @@
 #include "Renderer.h"
 
 
-Renderer::Renderer(Window &w) {
-	windowHandle = &w;
+Renderer::Renderer(int windowWidth, int windowHeight) {
+	windowHandle = new Window(windowWidth, windowHeight);
 }
 
 
 Renderer::~Renderer() {
-	
+	delete windowHandle;
 }
 
 void Renderer::renderScene() {

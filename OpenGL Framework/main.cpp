@@ -7,8 +7,7 @@ const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 800;
 
 int main() {
-	Window w = Window(WINDOW_WIDTH, WINDOW_HEIGHT);
-	Renderer r = Renderer(w);
+	Renderer r = Renderer(WINDOW_WIDTH, WINDOW_HEIGHT);
 	Game g = Game(&r);
 
 	//For the frame time calculation. (fps)
@@ -20,7 +19,7 @@ int main() {
 	int nbFrames = 0;
 
 	//Main loop to rule it all
-	while (!glfwWindowShouldClose(w.getWindow()))
+	while (!glfwWindowShouldClose(r.getGLFWWindow()))
 	{
 		//Measure frame drawing speed for performance profiling
 		double currentTime = glfwGetTime();
@@ -55,12 +54,12 @@ int main() {
 		//Calls draw on all of the Renderer's RenderObjects
 		r.renderScene();
 
-		glfwSwapBuffers(w.getWindow());
+		glfwSwapBuffers(r.getGLFWWindow());
 		glfwPollEvents();
 
 		//Esc to close the window and exit the game
-		if (glfwGetKey(w.getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
-			glfwSetWindowShouldClose(w.getWindow(), GL_TRUE);
+		if (glfwGetKey(r.getGLFWWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			glfwSetWindowShouldClose(r.getGLFWWindow(), GL_TRUE);
 	}
 	
 	return 0;
