@@ -12,6 +12,9 @@
     <Filter Include="Derived Entities">
       <UniqueIdentifier>{34bf098c-d9ad-4df8-862f-c57e9eaabd8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{a4d1c2ca-71d9-4688-9f69-12f1b2fc4766}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -151,5 +154,34 @@
     <ClInclude Include="Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\2d_tex_col_vertex.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\3d_lit_tex_col_vertex.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\3d_tex_col_vertex.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\altOldLitFrag.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\altOldLitVert.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\lit_tex_col_fragment.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\oldLitFrag.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\oldLitVert.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_col_fragment.glsl">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

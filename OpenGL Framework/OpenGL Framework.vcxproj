@@ -116,6 +116,17 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\2d_tex_col_vertex.glsl" />
+    <None Include="shaders\3d_lit_tex_col_vertex.glsl" />
+    <None Include="shaders\3d_tex_col_vertex.glsl" />
+    <None Include="shaders\altOldLitFrag.glsl" />
+    <None Include="shaders\altOldLitVert.glsl" />
+    <None Include="shaders\lit_tex_col_fragment.glsl" />
+    <None Include="shaders\oldLitFrag.glsl" />
+    <None Include="shaders\oldLitVert.glsl" />
+    <None Include="shaders\tex_col_fragment.glsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
