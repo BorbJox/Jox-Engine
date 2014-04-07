@@ -16,7 +16,7 @@ RenderObject::RenderObject(GLuint type, std::vector<glm::vec3> vertices, Shader*
 }
 
 RenderObject::RenderObject(GLuint type, std::vector<glm::vec3> vertices, glm::vec3 colour, Shader* shader, glm::vec3 position) : shader(shader), type(type), vertices(vertices) {
-	for (int i = 0; i < vertices.size(); ++i) 
+	for (unsigned int i = 0; i < vertices.size(); ++i) 
 		colours.push_back(colour);
 	hasColour = true;
 	modelMatrix = glm::translate(glm::mat4(1.0), position);
