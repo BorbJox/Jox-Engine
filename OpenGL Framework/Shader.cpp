@@ -1,7 +1,7 @@
 #include "Shader.h"
 
 
-Shader::Shader(bool handles3D, bool handlesTextures, bool handlesNormals, string vertexFile, string fragmentFile, string geometryFile, string tessControlShaderFile, string tesselationFile) : enabled3D(handles3D), enabledTextures(handlesTextures), enabledNormals(handlesNormals) {
+Shader::Shader(shaderParameters parameters, std::string vertexFile, std::string fragmentFile) : params(parameters) {
 
 	program = glCreateProgram();
 
@@ -9,49 +9,26 @@ Shader::Shader(bool handles3D, bool handlesTextures, bool handlesNormals, string
 	glAttachShader(program, vertexShader);
 	fragmentShader = GenerateShader(fragmentFile, GL_FRAGMENT_SHADER);
 	glAttachShader(program, fragmentShader);
-	if (!geometryFile.empty()) {
-		geometryShader = GenerateShader(geometryFile, GL_GEOMETRY_SHADER);
-		glAttachShader(program, geometryShader);
-	}
-	if (!tessControlShaderFile.empty()) {
-		tcsShader = GenerateShader(tessControlShaderFile, GL_TESS_CONTROL_SHADER);
-		glAttachShader(program, tcsShader);
-	}
-	if (!tesselationFile.empty()) {
-		tesselationShader = GenerateShader(tesselationFile, GL_TESS_EVALUATION_SHADER);
-		glAttachShader(program, tesselationShader);
-	}
 	
 	loadFailed = !LinkProgram();
-	
 }
 
 
 Shader::~Shader() {
-	
-}
-
-void Shader::deleteProgram() {
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
-	if (geometryShader != 0)
-		glDeleteShader(geometryShader);
-	if (tcsShader != 0)
-		glDeleteShader(tcsShader);
-	if (tesselationShader != 0)
-		glDeleteShader(tesselationShader);
 	glDeleteProgram(program);
 }
 
-bool Shader::LoadShaderFile(string from, string &into)	{
-	ifstream file;
-	string temp;
+bool Shader::LoadShaderFile(std::string from, std::string &into)	{
+	std::ifstream file;
+	std::string temp;
 
-	cout << "Loading shader text from " << from << endl;
+	std::cout << "Loading shader text from " << from << std::endl;
 
 	file.open(from.c_str());
 	if (!file.is_open()){
-		cout << "File does not exist!" << endl;
+		std::cout << "File does not exist!" << std::endl;
 		return false;
 	}
 
@@ -62,16 +39,16 @@ bool Shader::LoadShaderFile(string from, string &into)	{
 
 
 	file.close();
-	cout << "Loaded shader text!" << endl;
+	std::cout << "Loaded shader text!" << std::endl;
 	return true;
 }
 
-GLuint Shader::GenerateShader(string from, GLenum type)	{
-	cout << "Compiling Shader..." << endl;
+GLuint Shader::GenerateShader(std::string from, GLenum type)	{
+	std::cout << "Compiling Shader..." << std::endl;
 
-	string load;
+	std::string load;
 	if (!LoadShaderFile(from, load)) {
-		cout << "Compiling failed!" << endl;
+		std::cout << "Compiling failed!" << std::endl;
 		loadFailed = true;
 		return 0;
 	}
@@ -86,14 +63,14 @@ GLuint Shader::GenerateShader(string from, GLenum type)	{
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
 
 	if (status == GL_FALSE)	{
-		cout << "Compiling failed!" << endl;
+		std::cout << "Compiling failed!" << std::endl;
 		char error[512];
 		glGetInfoLogARB(shader, sizeof(error), NULL, error);
-		cout << error;
+		std::cout << error;
 		loadFailed = true;
 		return 0;
 	}
-	cout << "Compiling success!" << endl << endl;
+	std::cout << "Compiling success!" << std::endl << std::endl;
 	loadFailed = false;
 	return shader;
 }
@@ -112,7 +89,7 @@ bool Shader::LinkProgram()	{
 
 		glGetProgramInfoLog(program, 2048, NULL, error);
 
-		cout << string(error) << endl;
+		std::cout << std::string(error) << std::endl;
 	}
 
 	return code == GL_TRUE ? true : false;

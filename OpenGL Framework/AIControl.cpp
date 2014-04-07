@@ -3,7 +3,7 @@
 
 AIControl::AIControl() {
 	if (loadSampleGrid()) {
-		cout << "node loading success!";
+		std::cout << "Node loading success!";
 	}
 }
 
@@ -12,10 +12,10 @@ AIControl::~AIControl() {
 
 }
 
-vector<pathNode*> AIControl::calculatePath(pathNode* target) {
-	vector<ParentedNode*> openList;
-	vector<ParentedNode*> closedList;
-	vector<pathNode*> resultPath;
+std::vector<pathNode*> AIControl::calculatePath(pathNode* target) {
+	std::vector<ParentedNode*> openList;
+	std::vector<ParentedNode*> closedList;
+	std::vector<pathNode*> resultPath;
 
 	//Initialise starting node
 	ParentedNode* tempParentedNode = new ParentedNode();

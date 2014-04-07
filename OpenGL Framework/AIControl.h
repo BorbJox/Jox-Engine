@@ -22,10 +22,10 @@ class AIControl
 public:
 	AIControl();
 	~AIControl();
-	vector<pathNode*> getHexagons() { return grid; }
-	vector<pathNode*> calculatePath(pathNode* target);
+	std::vector<pathNode*> getHexagons() { return grid; }
+	std::vector<pathNode*> calculatePath(pathNode* target);
 private:
-	vector<pathNode*> grid;
+	std::vector<pathNode*> grid;
 	pathNode* currentPosition;
 	bool loadSampleGrid();
 };

@@ -26,7 +26,7 @@ void Renderer::overwriteObject(int i, RenderObject* object) {
 	objectArray[i] = object;
 }
 
-void Renderer::overwriteObjectArray(vector<RenderObject*> newArray) {
+void Renderer::overwriteObjectArray(std::vector<RenderObject*> newArray) {
 	objectArray = newArray;
 }
 

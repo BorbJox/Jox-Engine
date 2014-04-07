@@ -9,9 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{3eab15d5-d5c0-41d7-ae27-a0e18eec12aa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Derived Entities">
       <UniqueIdentifier>{34bf098c-d9ad-4df8-862f-c57e9eaabd8d}</UniqueIdentifier>
     </Filter>
@@ -77,6 +74,15 @@
     <ClCompile Include="AIControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -136,22 +142,14 @@
     <ClInclude Include="AIControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="shaders\genericFragment.glsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="shaders\genericVertex.glsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="shaders\generic3DVertex.glsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="shaders\genericTextured3DVertex.glsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="shaders\genericTexturedFragment.glsl">
-      <Filter>Shaders</Filter>
-    </None>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

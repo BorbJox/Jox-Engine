@@ -19,7 +19,7 @@ public:
 	//Overwrites the RenderObject at the given index.
 	void overwriteObject(int i, RenderObject* object);
 	//Replaces the current array of drawn objects with the provided one (does not delete any previous objects).
-	void overwriteObjectArray(vector<RenderObject*> newArray);
+	void overwriteObjectArray(std::vector<RenderObject*> newArray);
 	//Delete the RenderObject at that location (pointer become null pointer).
 	void deleteObject(int i);
 	//Don't forget to delete pointers if you're not going to use the objects any more!
@@ -27,7 +27,7 @@ public:
 	Window* getWindow() { return windowHandle; }
 	void setCamera(glm::mat4 projection, glm::mat4 view);
 private:
-	vector<RenderObject*> objectArray; 
+	std::vector<RenderObject*> objectArray;
 	Window* windowHandle;
 	glm::mat4 projectionMatrix;
 	glm::mat4 viewMatrix;

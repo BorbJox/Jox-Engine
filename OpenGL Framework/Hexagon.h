@@ -9,9 +9,9 @@ public:
 	glm::vec3 getColour() { return colour; }
 	//Must have a tied RenderObject
 	void changeColour(glm::vec3 col);
-	vector<glm::vec3> getVertexData() { return vertices; }
+	std::vector<glm::vec3> getVertexData() { return vertices; }
 private:
-	vector<glm::vec3> vertices;
+	std::vector<glm::vec3> vertices;
 	glm::vec3 colour;
 };
 

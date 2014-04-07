@@ -3,40 +3,40 @@
 #include <iostream>
 #include <fstream>
 #include "glew\glew.h"
-using namespace std;
 
-
+struct shaderParameters {
+	bool handles3D;
+	bool handlesColour;
+	bool handlesTextures;
+	bool handlesLighting;
+	bool handlesNormals;
+};
 
 class Shader {
 public:
-	/* Shader pipeline provides program to link and use.
+	/* Shader pipeline provides a program to link and use.
 	To use:
 	1.Construct, with paths to glsl source code of shaders
 	2.Check if ShaderLoaded() correctly (Optional)
 	3.If you use other programs, call LinkProgram() before using this one again
+	Current shader limitations: Need position, colour and UV values, with uniform modelTranform (mat4), colourAmount (0.0 - 1.0) and textureSampler (sampler2D) values.
 	*/
-	Shader(bool handles3D, bool handlesTextures, bool handlesNormals, string vertex, string fragment, string geometry = "", string tcs = "", string tes = "");
+	Shader(shaderParameters params, std::string vertex, std::string fragment);
 	~Shader();
 	GLuint getShaderProgram() { return program; }
 	bool ShaderLoaded() { return !loadFailed; }
-	bool handles3D() { return enabled3D; }
-	bool handlesTextures() { return enabledTextures; }
-	bool handlesNormals() { return enabledNormals; }
+	bool handles3D() { return params.handles3D; }
+	bool handlesTextures() { return params.handlesTextures; }
+	bool handlesNormals() { return params.handlesNormals; }
 	bool LinkProgram();
-	void deleteProgram();
 private:
-	bool LoadShaderFile(string from, string &into);
-	GLuint GenerateShader(string from, GLenum type);
+	shaderParameters params;
+	bool LoadShaderFile(std::string from, std::string &into);
+	GLuint GenerateShader(std::string from, GLenum type);
 	GLuint program;
 	GLuint vertexShader;
 	GLuint fragmentShader;
-	GLuint geometryShader = 0;
-	GLuint tcsShader = 0;
-	GLuint tesselationShader = 0;
 	bool loadFailed;
-	bool enabled3D;
-	bool enabledTextures;
-	bool enabledNormals;
 	
 };
 

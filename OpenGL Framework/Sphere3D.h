@@ -5,7 +5,7 @@
 //Derived game representation of a sphere entity. Does not handle physics
 class Sphere3D : public Entity {
 public:
-	Sphere3D(float radius, string texturePath, glm::vec3 pos);
+	Sphere3D(float radius, std::string texturePath, glm::vec3 pos);
 	~Sphere3D();
 	std::vector<glm::vec3> getVertexData() { return vertices; }
 	std::vector<glm::vec2> getUVData() { return uvs; }

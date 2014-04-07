@@ -1,7 +1,7 @@
 #include "Sphere3D.h"
 
 
-Sphere3D::Sphere3D(float radius, string texturePath, glm::vec3 pos) : Entity(pos), radius(radius), texturePath(texturePath) {
+Sphere3D::Sphere3D(float radius, std::string texturePath, glm::vec3 pos) : Entity(pos), radius(radius), texturePath(texturePath) {
 	if (!loadMesh(radius)) {
 		failedToLoad = true;
 	}

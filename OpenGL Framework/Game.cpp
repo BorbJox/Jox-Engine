@@ -115,13 +115,13 @@ void Game::update() {
 			for (int j = 20; j > 0; --j)
 				scenes[currentSceneID]->getEntityArray()[i-j]->setPosition(glm::vec3(-1.0f, -1.0f, -1.0f));
 			//Drawing new dots
-			vector<pathNode*> viableNodes = AIController->calculatePath(AIController->getHexagons()[counter]);
+			std::vector<pathNode*> viableNodes = AIController->calculatePath(AIController->getHexagons()[counter]);
 			for each (pathNode* n in viableNodes) {
 				scenes[currentSceneID]->getEntityArray()[i]->setPosition(n->getAttachedHex()->getPosition());
 				--i;
-				cout << "X" << n->getXCoord() << " Y" << n->getYCoord() << " Cost:" << n->getCost() << endl;
+				std::cout << "X" << n->getXCoord() << " Y" << n->getYCoord() << " Cost:" << n->getCost() << std::endl;
 			}
-			cout << endl;
+			std::cout << std::endl;
 		}
 		break;
 	default:
@@ -183,7 +183,7 @@ Scene* Game::createPhysicsBox() {
 		0.8f, 0.9f, 1.1f, 1.5f, 1.0f,
 		1.5f, 1.0f, 1.1f, 0.8f, 0.6f
 	};
-	string textures[15] = {
+	std::string textures[15] = {
 		"img/blue.png", "img/brown.png", "img/green.png", "img/orange2.png", "img/pink.png", "img/purple.png", "img/red.png", "img/yellow.png",
 		"img/blue.png", "img/brown.png", "img/green.png", "img/orange2.png", "img/pink.png", "img/purple.png", "img/red.png"
 	};
