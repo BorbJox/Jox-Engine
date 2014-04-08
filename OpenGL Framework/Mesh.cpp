@@ -1,7 +1,7 @@
 #include "Mesh.h"
 
 
-Mesh::Mesh(std::string filename, bool is3D) : is3D(is3D) {
+Mesh::Mesh(std::string filename) {
 
 	std::ifstream file;
 	//Try to open the file

@@ -14,7 +14,7 @@ struct triangleVertexIndices {
 
 class Mesh {
 public:
-	Mesh(std::string filename, bool is3D);
+	Mesh(std::string filename);
 	~Mesh();
 private:
 	std::vector<glm::vec3> vertices;
@@ -22,6 +22,5 @@ private:
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> colours;
 	std::vector<triangleVertexIndices> elements;
-	bool is3D;
 };
 
