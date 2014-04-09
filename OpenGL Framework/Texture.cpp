@@ -15,6 +15,8 @@ Texture::Texture(std::string filename) {
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	SOIL_free_image_data(image);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 Texture::~Texture() {

@@ -25,9 +25,7 @@ public:
 	~Shader();
 	GLuint getShaderProgram() { return program; }
 	bool ShaderLoaded() { return !loadFailed; }
-	bool handles3D() { return params.handles3D; }
-	bool handlesTextures() { return params.handlesTextures; }
-	bool handlesNormals() { return params.handlesNormals; }
+	bool handlesLighting() { return params.handlesLighting; }
 	bool LinkProgram();
 private:
 	shaderParameters params;

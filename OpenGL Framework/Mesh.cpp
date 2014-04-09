@@ -7,13 +7,12 @@ Mesh::Mesh(std::string filename) {
 	//Try to open the file
 	file.open(filename);
 	if (!file.is_open()) {
-		printf("Failed to open a 3D mesh file!\n");
+		std::cout << "Failed to open " << filename << "!" << std::endl;
 	}
-	//If file succesfully opened
+		//If file succesfully opened
 	else {
 		bool readingHeaders;
 		unsigned int vertexCount;
-		unsigned int faceCount;
 		bool foundPosition = false;
 		bool foundNormals = false;
 		bool foundUVs = false;
@@ -23,7 +22,7 @@ Mesh::Mesh(std::string filename) {
 		//Check if the file structure is of the ply format
 		file >> lineHeader;
 		if (strcmp(lineHeader, "ply") != 0) {
-			std::cout << "Mesh file '" << filename << "' is not suitable for reading!" << std::endl;
+			std::cout << "Mesh file " << filename << " is not suitable for reading!" << std::endl;
 		}
 		else {
 
@@ -37,7 +36,7 @@ Mesh::Mesh(std::string filename) {
 						file >> vertexCount;
 					}
 					else if (strcmp(tempHeader, "face") == 0) {
-						file >> faceCount;
+						file >> triangleCount;
 					}
 				}
 				//Check which properties the file provides
@@ -73,6 +72,19 @@ Mesh::Mesh(std::string filename) {
 				else if (strcmp(lineHeader, "end_header") == 0) {
 					break;
 				}
+			}
+
+			if (!foundPosition) {
+				std::cout << "Could not find vertex position data in the .ply file!" << std::endl;
+			}
+			if (!foundNormals) {
+				std::cout << "Could not find vertex normals data in the .ply file!" << std::endl;
+			}
+			if (!foundUVs) {
+				std::cout << "Could not find vertex UV data in the .ply file!" << std::endl;
+			}
+			if (!foundColour) {
+				std::cout << "Could not find vertex colour data in the .ply file!" << std::endl;
 			}
 
 			//Read the vertex values
@@ -111,14 +123,24 @@ Mesh::Mesh(std::string filename) {
 			}
 
 			//Read the element values
-			for (unsigned int i = 0; i < faceCount; ++i) {
-				triangleVertexIndices tempTriangle;
+			for (unsigned int i = 0; i < triangleCount; ++i) {
 				file.ignore();
-				file >> tempTriangle.first;
-				file >> tempTriangle.second;
-				file >> tempTriangle.third;
-				elements.push_back(tempTriangle);
+				for (unsigned int j = 0; j < 3; ++j) {
+					int tempIndex;
+					file >> tempIndex;
+					indices.push_back(tempIndex);
+				}
 			}
+		}
+		
+		//If all data needed exists, buffer it to the GPU.
+		if (foundPosition && foundNormals && foundUVs && foundColour) {
+			BufferData();
+			incompleteData = false;
+		}
+		else {
+			std::cout << "Cannot buffer " << filename << " due to incomplete data!" << std::endl;
+			incompleteData = true;
 		}
 	}
 	file.close();
@@ -126,5 +148,42 @@ Mesh::Mesh(std::string filename) {
 
 
 Mesh::~Mesh() {
+	if (!incompleteData) {
+		glDeleteBuffers(1, &positionBuffer);
+		glDeleteBuffers(1, &colourBuffer);
+		glDeleteBuffers(1, &uvBuffer);
+		glDeleteBuffers(1, &normalBuffer);
+		glDeleteBuffers(1, &indicesBuffer);
 
+		glDeleteVertexArrays(1, &vao);
+	}
+}
+
+void Mesh::BufferData() {
+	glBindVertexArray(vao);
+
+	glGenBuffers(1, &positionBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(glm::vec3), &vertices.front(), GL_STATIC_DRAW);
+
+	glGenBuffers(1, &colourBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, colourBuffer);
+	glBufferData(GL_ARRAY_BUFFER, colours.size()*sizeof(glm::vec3), &colours.front(), GL_STATIC_DRAW);
+
+	glGenBuffers(1, &uvBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
+	glBufferData(GL_ARRAY_BUFFER, uvs.size()*sizeof(glm::vec2), &uvs.front(), GL_STATIC_DRAW);
+
+	glGenBuffers(1, &normalBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, normalBuffer);
+	glBufferData(GL_ARRAY_BUFFER, normals.size()*sizeof(glm::vec3), &normals.front(), GL_STATIC_DRAW);
+
+	glGenBuffers(1, &indicesBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size()*sizeof(unsigned int), &indices.front(), GL_STATIC_DRAW);
+	
+	//Unbind the buffers to prevent external tampering
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 }

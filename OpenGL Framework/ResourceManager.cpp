@@ -52,6 +52,16 @@ Texture* ResourceManager::getTexture(std::string filename) {
 	}
 }
 
-Mesh* ResourceManager::getMesh(std::string name) {
-
+Mesh* ResourceManager::getMesh(std::string filename) {
+	//Looks for existing loaded mesh, and creates a new one if it does not exist.
+	std::map<std::string, Mesh*>::iterator foundMesh = meshes.find(filename);
+	if (foundMesh == meshes.end()) {
+		Mesh* tempMesh = new Mesh(filename);
+		meshes.insert(std::pair<std::string, Mesh*>(filename, tempMesh));
+		return tempMesh;
+	}
+	else {
+		Mesh* tempMesh = foundMesh->second;
+		return tempMesh;
+	}
 }
